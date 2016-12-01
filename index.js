@@ -28,4 +28,3 @@ mofron.parts.PageHeader = class extends mofron.parts.Header {
         }
     }
 }
-/* end of file */
