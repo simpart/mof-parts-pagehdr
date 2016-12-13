@@ -25,9 +25,9 @@ mofron.parts.PageHeader = class extends mofron.parts.Header {
             this.addChild(title);
             
             /* set text color */
-            if ( (undefined != mofron.util.theme) &&
-                 (null !== mofron.util.theme) ) {
-                var clr = mofron.util.theme.getColor(0);
+            var thm_clr = mofron.theme.getColor();
+            if (undefined != mofron.theme) {
+                var clr = mofron.theme.getColor(0);
                 if (null !== clr) {
                     var rgb = clr.getRgba();
                     if (290 > (rgb[0]+rgb[1]+rgb[2])) {
