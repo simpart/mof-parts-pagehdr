@@ -1,6 +1,6 @@
 {
   "name": "mof-parts-pagehdr",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "page header of mofron UI parts",
   "main": "index.js",
   "scripts": {
