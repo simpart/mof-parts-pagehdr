@@ -6,6 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "mofron-parts-header" : "^0.0.3",
+    "mofron-parts-text"   : "^0.0.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/simpart/mof-parts-pagehdr.git"
