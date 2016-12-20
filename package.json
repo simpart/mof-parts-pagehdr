@@ -1,6 +1,6 @@
 {
-  "name": "mof-parts-pagehdr",
-  "version": "0.0.3",
+  "name": "mofron-parts-pagehdr",
+  "version": "0.0.4",
   "description": "page header of mofron UI parts",
   "main": "index.js",
   "scripts": {
@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simpart/mof-parts-pagehdr.git"
+    "url": "git+https://github.com/simpart/mofron-parts-pagehdr.git"
   },
   "keywords": [
     "mofron"
   ],
-  "author": "simpart",
+  "author": "simparts",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/simpart/mof-parts-pagehdr/issues"
+    "url": "https://github.com/simpart/mofron-parts-pagehdr/issues"
   },
-  "homepage": "https://github.com/simpart/mof-parts-pagehdr#readme"
+  "homepage": "https://github.com/simpart/mofron-parts-pagehdr#readme"
 }
