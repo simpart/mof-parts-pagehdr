@@ -3,8 +3,6 @@
  * @brief  Simpale Page Header
  * @author simpart
  */
-require('mofron-parts-header');
-require('mofron-parts-text');
 
 mofron.parts.PageHeader = class extends mofron.parts.Header {
     initContents(vd, prm) {
