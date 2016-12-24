@@ -1,10 +1,10 @@
 /**
- * @file   PageHeader.js
- * @brief  Simpale Page Header
+ * @file   pagehdr.js
+ * @brief  Simpale Page Header Component
  * @author simpart
  */
 
-mofron.parts.PageHeader = class extends mofron.parts.Header {
+mofron.comp.PageHeader = class extends mofron.comp.Header {
     initContents(vd, prm) {
         try {
             super.initContents(vd, prm);
@@ -19,13 +19,12 @@ mofron.parts.PageHeader = class extends mofron.parts.Header {
             conts.setStyle('align-items', 'center');
             
             /* set header title */
-            var title = new mofron.parts.Text(prm);
+            var title = new mofron.comp.Text(prm);
             title.size(35);
             title.style('margin-left', '20px');
             this.addChild(title);
             
             /* set text color */
-            var thm_clr = mofron.theme.getColor();
             if (undefined != mofron.theme) {
                 var clr = mofron.theme.getColor(0);
                 if (null !== clr) {

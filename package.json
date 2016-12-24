@@ -1,18 +1,14 @@
 {
-  "name": "mofron-parts-pagehdr",
-  "version": "0.0.5",
-  "description": "page header of mofron UI parts",
+  "name": "mofron-comp-pagehdr",
+  "version": "0.0.6",
+  "description": "Page Header Extend Component of mofron Header Component",
   "main": "dist/pagehdr.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies": {
-    "mofron-parts-header": "^0.0.4",
-    "mofron-parts-text": "^0.0.4"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simpart/mofron-parts-pagehdr.git"
+    "url": "git+https://github.com/simpart/mofron-comp-pagehdr.git"
   },
   "keywords": [
     "mofron"
@@ -20,9 +16,9 @@
   "author": "simparts",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/simpart/mofron-parts-pagehdr/issues"
+    "url": "https://github.com/simpart/mofron-comp-pagehdr/issues"
   },
-  "homepage": "https://github.com/simpart/mofron-parts-pagehdr#readme",
+  "homepage": "https://github.com/simpart/mofron-comp-pagehdr#readme",
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",

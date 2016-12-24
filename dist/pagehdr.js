@@ -1,5 +1,5 @@
-require('mofron-parts-header');
-require('mofron-parts-text');
+require('mofron-comp-header');
+require('mofron-comp-text');
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -59,13 +59,13 @@ require('mofron-parts-text');
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	/**
-	 * @file   PageHeader.js
-	 * @brief  Simpale Page Header
+	 * @file   pagehdr.js
+	 * @brief  Simpale Page Header Component
 	 * @author simpart
 	 */
 
-	mofron.parts.PageHeader = function (_mofron$parts$Header) {
-	    _inherits(_class, _mofron$parts$Header);
+	mofron.comp.PageHeader = function (_mofron$comp$Header) {
+	    _inherits(_class, _mofron$comp$Header);
 
 	    function _class() {
 	        _classCallCheck(this, _class);
@@ -89,13 +89,12 @@ require('mofron-parts-text');
 	                conts.setStyle('align-items', 'center');
 
 	                /* set header title */
-	                var title = new mofron.parts.Text(prm);
+	                var title = new mofron.comp.Text(prm);
 	                title.size(35);
 	                title.style('margin-left', '20px');
 	                this.addChild(title);
 
 	                /* set text color */
-	                var thm_clr = mofron.theme.getColor();
 	                if (undefined != mofron.theme) {
 	                    var clr = mofron.theme.getColor(0);
 	                    if (null !== clr) {
@@ -116,7 +115,7 @@ require('mofron-parts-text');
 	    }]);
 
 	    return _class;
-	}(mofron.parts.Header);
+	}(mofron.comp.Header);
 
 /***/ }
 /******/ ]);
