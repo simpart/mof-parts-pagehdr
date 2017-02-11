@@ -1,6 +1,6 @@
 {
   "name": "mofron-comp-pagehdr",
-  "version": "0.0.6",
+  "version": "0.3.3",
   "description": "Page Header Extend Component of mofron Header Component",
   "main": "dist/pagehdr.js",
   "scripts": {
