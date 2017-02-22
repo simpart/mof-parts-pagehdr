@@ -1,8 +1,8 @@
 {
-  "name": "mofron-comp-pagehdr",
-  "version": "0.3.3",
-  "description": "Page Header Extend Component of mofron Header Component",
-  "main": "dist/pagehdr.js",
+  "name": "mofron-comp-header-title",
+  "version": "0.3.4",
+  "description": "Title Component of mofron header extend component",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,9 +20,5 @@
   },
   "homepage": "https://github.com/simpart/mofron-comp-pagehdr#readme",
   "devDependencies": {
-    "babel-core": "^6.21.0",
-    "babel-loader": "^6.2.10",
-    "babel-preset-es2015": "^6.18.0",
-    "webpack": "^1.14.0"
   }
 }
