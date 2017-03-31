@@ -11,12 +11,15 @@ npm install mofron-comp-header-title
 
 # Sample
 ```javascript
-require('mofron');
-let Header = require('mofron-comp-header-title');
+let Mof    = require("mofron");
+let TtlHdr = require("mofron-comp-header-title");
 
-new Header({
-    param   : 'Title',
-    url     : './',     // path to top page
+new TtlHdr({
+    /* this is option paramter */
+    title   : 'APP_TITLE',
+    url     : './',
+    height  : 80,
+    color   : new Mof.Color(70,70,70),
     visible : true
 });
 ```
