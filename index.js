@@ -11,7 +11,7 @@ mofron.comp.header.Title = class extends mofron.comp.Header {
     constructor (prm_opt) {
         try {
             super();
-            this.name('Titile');
+            this.name('Title');
             this.prmOpt(prm_opt);
         } catch (e) {
             console.error(e.stack);
