@@ -7,10 +7,21 @@ require('mofron-comp-text');
 require('mofron-event-click');
 
 mofron.comp.header.Title = class extends mofron.comp.Header {
+    
+    constructor (prm_opt) {
+        try {
+            super();
+            this.name('Titile');
+            this.prmOpt(prm_opt);
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
     initDomConts(prm) {
         try {
             super.initDomConts();
-            this.name('Title');
             
             /* set header style */
             this.style({
