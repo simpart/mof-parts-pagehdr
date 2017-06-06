@@ -91,7 +91,7 @@ mofron.comp.header.Title = class extends mofron.comp.Header {
             if (undefined === this.m_url) {
                 this.title().addEvent(
                     new mofron.event.Click(
-                        (ttl) => {
+                        (tgt, ttl) => {
                             try {
                                 if (null !== ttl.url()) {
                                     location.href = ttl.url();
