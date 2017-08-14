@@ -1,7 +1,7 @@
 {
-  "name": "mofron-comp-header-title",
-  "version": "0.4.5",
-  "description": "Title Component of mofron header extend component",
+  "name": "mofron-comp-titleheader",
+  "version": "0.4.7",
+  "description": "title header component for mofron",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

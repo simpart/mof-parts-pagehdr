@@ -2,16 +2,17 @@
  * @file   mofron-comp-header-title/index.js
  * @author simpart
  */
-require('mofron-comp-header');
+let mf     = require('mofron');
+let Header = require('mofron-comp-header');
 require('mofron-comp-text');
-require('mofron-event-click');
+let Click  = require('mofron-event-click');
 
-mofron.comp.header.Title = class extends mofron.comp.Header {
+mf.comp.TitleHeader = class extends Header {
     
     constructor (prm_opt) {
         try {
             super();
-            this.name('Title');
+            this.name('TitleHeader');
             this.prmOpt(prm_opt);
         } catch (e) {
             console.error(e.stack);
@@ -42,12 +43,13 @@ mofron.comp.header.Title = class extends mofron.comp.Header {
             if (undefined === val) {
                 /* getter */
                 if (undefined === this.m_title) {
-                    this.title(new mofron.comp.Text(''));
+                    let ThmComp = this.theme().component('mofron-comp-text');
+                    this.title(new ThmComp(''));
                 }
                 return this.m_title;
             }
             /* setter */
-            if (true === mofron.func.isInclude(val, 'Text')) {
+            if (true === mf.func.isInclude(val, 'Text')) {
                 val.size((null === val.size()) ? 35 : undefined);
                 val.style({ 'margin-left' : '20px' });
                 let chd = this.child();
@@ -76,7 +78,7 @@ mofron.comp.header.Title = class extends mofron.comp.Header {
             }
             var rgb = clr.rgba();
             if (290 > (rgb[0]+rgb[1]+rgb[2])) {
-                this.title().color(new mofron.Color(255,255,255));
+                this.title().color(new mf.Color(255,255,255));
             }
         } catch (e) {
             console.error(e.stack);
@@ -96,7 +98,7 @@ mofron.comp.header.Title = class extends mofron.comp.Header {
             }
             if (undefined === this.m_url) {
                 this.title().addEvent(
-                    new mofron.event.Click(
+                    new Click(
                         (tgt,ttl) => {
                             try {
                                 if (null !== ttl.url()) {
@@ -117,4 +119,4 @@ mofron.comp.header.Title = class extends mofron.comp.Header {
         }
     }
 }
-module.exports = mofron.comp.header.Title;
+module.exports = mf.comp.TitleHeader;
