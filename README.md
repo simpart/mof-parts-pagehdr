@@ -12,7 +12,7 @@ npm install mofron-comp-titleheader
 # Sample
 ```javascript
 let mf     = require("mofron");
-let Header = require("mofron-comp-header-title");
+let Header = require("mofron-comp-titleheader");
 
 new Header({
     /* this is option paramter */
