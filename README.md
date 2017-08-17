@@ -1,4 +1,4 @@
-# mofron-comp-header-title
+# mofron-comp-titleheader
 extends component of heaader for mofron.<br>
 this component is header for title of page.<br>
 please see [here](https://github.com/simpart/mofron) about an overview of mofron.<br>
@@ -6,20 +6,20 @@ please see [here](https://github.com/simpart/mofron) about an overview of mofron
 # Install
 
 ```bash
-npm install mofron-comp-header-title
+npm install mofron-comp-titleheader
 ```
 
 # Sample
 ```javascript
-let Mof    = require("mofron");
-let TtlHdr = require("mofron-comp-header-title");
+let mf     = require("mofron");
+let Header = require("mofron-comp-header-title");
 
-new TtlHdr({
+new Header({
     /* this is option paramter */
     title   : 'APP_TITLE',
     url     : './',
     height  : 80,
-    color   : new Mof.Color(70,70,70),
+    color   : new mf.Color(70,70,70),
     visible : true
 });
 ```
