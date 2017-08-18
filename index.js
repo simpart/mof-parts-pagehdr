@@ -7,12 +7,12 @@ let Header = require('mofron-comp-header');
 require('mofron-comp-text');
 let Click  = require('mofron-event-click');
 
-mf.comp.TitleHeader = class extends Header {
+mf.comp.Titleheader = class extends Header {
     
     constructor (prm_opt) {
         try {
             super();
-            this.name('TitleHeader');
+            this.name('Titleheader');
             this.prmOpt(prm_opt);
         } catch (e) {
             console.error(e.stack);
@@ -119,4 +119,5 @@ mf.comp.TitleHeader = class extends Header {
         }
     }
 }
-module.exports = mf.comp.TitleHeader;
+mf.comp.titleheader = {};
+module.exports = mf.comp.Titleheader;
