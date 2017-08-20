@@ -25,13 +25,19 @@ mf.comp.Titleheader = class extends Header {
             super.initDomConts();
             
             /* set header style */
-            this.style({
+            let hdr_css = {
                 'display'     : 'flex',
                 'align-items' : 'center'
-            });
+            };
+            this.style(hdr_css);
             
             /* set header title */
-            this.addChild(this.title());
+            hdr_css['margin-left'] = '20px';
+            this.addChild(
+                new mf.Component({
+                    style    : hdr_css
+                })
+            );
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -40,30 +46,69 @@ mf.comp.Titleheader = class extends Header {
     
     title (val) {
         try {
+            let ttl = this.child()[0].child();
             if (undefined === val) {
                 /* getter */
-                if (undefined === this.m_title) {
-                    let ThmComp = this.theme().component('mofron-comp-text');
-                    this.title(new ThmComp(''));
+                if (0 === ttl.length) {
+                    return null;
                 }
-                return this.m_title;
+                return (1 === ttl.length) ? ttl[0] : ttl;
             }
             /* setter */
+            if (0 === ttl.length) {
+                this.addTitle(val);
+            } else {
+                this.setTitleEvent(val);
+                this.child()[0].updChild(ttl[0], val);
+            }
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    addTitle (val) {
+        try {
+            let ttl = this.child()[0];
+            let set_val = null;
             if (true === mf.func.isInclude(val, 'Text')) {
-                val.size((null === val.size()) ? 35 : undefined);
-                val.style({ 'margin-left' : '20px' });
-                let chd = this.child();
-                for (let chd_idx in chd) {
-                    if(this.m_title.target().getId() === chd[chd_idx].target().getId()) {
-                        this.updChild(this.m_title, val);
-                    }
-                }
-                this.m_title = val;
+                set_val = val;
             } else if ('string' === typeof val) {
-                this.title().text(val);
+                let ThmComp = this.theme().component('mofron-comp-text');
+                set_val = new ThmComp(val);
             } else {
                 throw new Error('invalid parameter');
             }
+            
+            
+            set_val.size(
+                (null === val.size()) ? 35 : undefined
+            );
+            /* add click event */
+            this.setTitleEvent(set_val);
+            ttl.addChild(set_val);
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    setTitleEvent (val) {
+        try {
+            val.addEvent(
+                new Click(
+                    (tgt,ttl) => {
+                        try {
+                            if (null !== ttl.url()) {
+                                location.href = ttl.url();
+                            }
+                        } catch (e) {
+                            console.log(e.stack);
+                        }
+                    },
+                    this
+                )
+            );
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -95,22 +140,6 @@ mf.comp.Titleheader = class extends Header {
             /* setter */
             if ('string' !== typeof ul) {
                 throw new Error('invalid prameter');
-            }
-            if (undefined === this.m_url) {
-                this.title().addEvent(
-                    new Click(
-                        (tgt,ttl) => {
-                            try {
-                                if (null !== ttl.url()) {
-                                    location.href = ttl.url();
-                                }
-                            } catch (e) {
-                                console.log(e.stack);
-                            }
-                        },
-                        this
-                    )
-                );
             }
             this.m_url = ul;
         } catch (e) {
