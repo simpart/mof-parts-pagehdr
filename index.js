@@ -82,7 +82,7 @@ mf.comp.Titleheader = class extends Header {
             
             
             set_val.size(
-                (null === val.size()) ? 35 : undefined
+                (null === set_val.size()) ? 35 : undefined
             );
             /* add click event */
             this.setTitleEvent(set_val);
