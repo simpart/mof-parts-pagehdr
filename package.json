@@ -1,6 +1,6 @@
 {
-  "name": "mofron-comp-titleheader",
-  "version": "0.4.10",
+  "name": "mofron-comp-ttlhdr",
+  "version": "0.4.12",
   "description": "title header component for mofron",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simpart/mofron-comp-pagehdr.git"
+    "url": "git+https://github.com/simpart/mofron-comp-ttlhdr.git"
   },
   "dependencies": {
     "mofron-event-click" : ""
@@ -19,9 +19,9 @@
   "author": "simparts",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/simpart/mofron-comp-pagehdr/issues"
+    "url": "https://github.com/simpart/mofron-comp-ttlhdr/issues"
   },
-  "homepage": "https://github.com/simpart/mofron-comp-pagehdr#readme",
+  "homepage": "https://github.com/simpart/mofron-comp-ttlhdr#readme",
   "devDependencies": {
   }
 }

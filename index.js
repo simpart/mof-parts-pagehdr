@@ -7,13 +7,12 @@ let Header = require('mofron-comp-header');
 require('mofron-comp-text');
 let Click  = require('mofron-event-click');
 
-mf.comp.Titleheader = class extends Header {
+mf.comp.Ttlhdr = class extends Header {
     
-    constructor (prm_opt) {
+    constructor (po) {
         try {
-            super();
-            this.name('Titleheader');
-            this.prmOpt(prm_opt);
+            super(po);
+            this.name('Ttlhdr');
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -35,9 +34,14 @@ mf.comp.Titleheader = class extends Header {
             hdr_css['margin-left'] = '20px';
             this.addChild(
                 new mf.Component({
-                    style    : hdr_css
+                    style : hdr_css
                 })
             );
+            
+            /* add param */
+            if (null !== prm) {
+                this.addChild(prm);
+            }
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -73,17 +77,21 @@ mf.comp.Titleheader = class extends Header {
             let set_val = null;
             if (true === mf.func.isInclude(val, 'Text')) {
                 set_val = val;
+                set_val.size(
+                    (null === set_val.size()) ? 35 : undefined
+                );
             } else if ('string' === typeof val) {
-                let ThmComp = this.theme().component('mofron-comp-text');
-                set_val = new ThmComp(val);
+                set_val = this.theme().component('mofron-comp-text');
+                set_val.text(val);
+                set_val.size(
+                    (null === set_val.size()) ? 35 : undefined
+                );
+            } else if (true === mf.func.isInclude(val, 'Component')) {
+                set_val = val;
             } else {
                 throw new Error('invalid parameter');
             }
             
-            
-            set_val.size(
-                (null === set_val.size()) ? 35 : undefined
-            );
             /* add click event */
             this.setTitleEvent(set_val);
             ttl.addChild(set_val);
@@ -148,5 +156,5 @@ mf.comp.Titleheader = class extends Header {
         }
     }
 }
-mf.comp.titleheader = {};
-module.exports = mf.comp.Titleheader;
+mf.comp.ttlhdr = {};
+module.exports = mf.comp.Ttlhdr;
