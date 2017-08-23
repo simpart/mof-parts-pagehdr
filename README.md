@@ -1,7 +1,7 @@
 # mofron-comp-ttlhdr
 extends component of heaader for mofron.<br>
 this component is header for title of page.<br>
-please see [here](https://github.com/simpart/mofron) about an overview of mofron.<br>
+please see [here](https://github.com/mofron/mofron) about an overview of mofron.<br>
 
 # Install
 
@@ -12,7 +12,7 @@ npm install mofron-comp-ttlhdr
 # Sample
 ```javascript
 let mf     = require("mofron");
-let Header = require("mofron-comp-titleheader");
+let Header = require("mofron-comp-ttlhdr");
 
 let hdr = new Header({
     /* this is option paramter */
