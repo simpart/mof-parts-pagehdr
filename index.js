@@ -30,17 +30,15 @@ mf.comp.Ttlhdr = class extends Header {
             };
             this.style(hdr_css);
             
-            /* set header title */
+            /* set header title area */
             hdr_css['margin-left'] = '20px';
             this.addChild(
                 new mf.Component({
                     style : hdr_css
                 })
             );
-            
-            /* add param */
             if (null !== prm) {
-                this.addChild(prm);
+                this.title(prm);
             }
         } catch (e) {
             console.error(e.stack);
@@ -80,21 +78,24 @@ mf.comp.Ttlhdr = class extends Header {
                 set_val.size(
                     (null === set_val.size()) ? 35 : undefined
                 );
+                ttl.addChild(set_val);
+                this.setTitleEvent(set_val);
             } else if ('string' === typeof val) {
                 set_val = this.theme().component('mofron-comp-text');
+                ttl.addChild(set_val);
+                
+                this.setTitleEvent(set_val);
                 set_val.text(val);
                 set_val.size(
                     (null === set_val.size()) ? 35 : undefined
                 );
             } else if (true === mf.func.isInclude(val, 'Component')) {
                 set_val = val;
+                ttl.addChild(set_val);
+                this.setTitleEvent(set_val);
             } else {
                 throw new Error('invalid parameter');
             }
-            
-            /* add click event */
-            this.setTitleEvent(set_val);
-            ttl.addChild(set_val);
         } catch (e) {
             console.error(e.stack);
             throw e;
