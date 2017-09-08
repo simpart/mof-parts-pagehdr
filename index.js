@@ -75,10 +75,10 @@ mf.comp.Ttlhdr = class extends Header {
             let set_val = null;
             if (true === mf.func.isInclude(val, 'Text')) {
                 set_val = val;
+                ttl.addChild(set_val);
                 set_val.size(
                     (null === set_val.size()) ? 35 : undefined
                 );
-                ttl.addChild(set_val);
             } else if ('string' === typeof val) {
                 set_val = this.theme().component('mofron-comp-text');
                 ttl.addChild(set_val);
