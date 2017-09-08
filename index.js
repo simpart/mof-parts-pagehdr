@@ -79,12 +79,9 @@ mf.comp.Ttlhdr = class extends Header {
                     (null === set_val.size()) ? 35 : undefined
                 );
                 ttl.addChild(set_val);
-                this.setTitleEvent(set_val);
             } else if ('string' === typeof val) {
                 set_val = this.theme().component('mofron-comp-text');
                 ttl.addChild(set_val);
-                
-                this.setTitleEvent(set_val);
                 set_val.text(val);
                 set_val.size(
                     (null === set_val.size()) ? 35 : undefined
@@ -92,10 +89,12 @@ mf.comp.Ttlhdr = class extends Header {
             } else if (true === mf.func.isInclude(val, 'Component')) {
                 set_val = val;
                 ttl.addChild(set_val);
-                this.setTitleEvent(set_val);
             } else {
                 throw new Error('invalid parameter');
             }
+            /* set title config */
+            this.setTitleEvent(set_val);
+            this.setTitleColor(set_val);
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -104,20 +103,53 @@ mf.comp.Ttlhdr = class extends Header {
     
     setTitleEvent (val) {
         try {
+            let clk_fnc = (tgt, ttl) => {
+                try {
+                    if (null !== ttl.url()) {
+                        location.href = ttl.url();
+                    }
+                } catch (e) {
+                    console.log(e.stack);
+                }
+            };
+            
+            /* set click event */
             val.addEvent(
-                new Click(
-                    (tgt,ttl) => {
-                        try {
-                            if (null !== ttl.url()) {
-                                location.href = ttl.url();
-                            }
-                        } catch (e) {
-                            console.log(e.stack);
-                        }
-                    },
-                    this
-                )
+                new Click(clk_fnc, this)
             );
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    setTitleColor (ttl) {
+        try {
+            let rgb = this.color().rgba();
+            let clr = null;
+            
+            if (290 > (rgb[0]+rgb[1]+rgb[2])) {
+                clr = new mf.Color(255,255,255);
+            } else {
+                clr = new mf.Color(0,0,0);
+            }
+            
+            if (true === mf.func.isObject(ttl, 'Text')) {
+                ttl.color(new mf.Color(255,255,255));
+            } else {
+                let chd_ttl = this.title();
+                if (true === mf.func.isObject(chd_ttl, 'Text')) {
+                    ttl.color(new mf.Color(255,255,255));
+                } else if ( (null !== chd_ttl) && (undefined !== chd_ttl[0]) ) {
+                    for (let cidx in chd_ttl) {
+                        if (true === mf.func.isObject(chd_ttl[cidx], 'Text')) {
+                            chd_ttl[cidx].color(
+                                new mf.Color(255,255,255)
+                            );
+                        }
+                    }
+                }
+            }
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -130,9 +162,8 @@ mf.comp.Ttlhdr = class extends Header {
             if (undefined !== ret) {
                 return ret;
             }
-            var rgb = clr.rgba();
-            if (290 > (rgb[0]+rgb[1]+rgb[2])) {
-                this.title().color(new mf.Color(255,255,255));
+            if (0 !== this.child().length) {
+                this.setTitleColor();
             }
         } catch (e) {
             console.error(e.stack);
