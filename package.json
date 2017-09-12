@@ -1,6 +1,6 @@
 {
   "name": "mofron-comp-ttlhdr",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "title header component for mofron",
   "main": "index.js",
   "scripts": {

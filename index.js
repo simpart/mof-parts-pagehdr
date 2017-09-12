@@ -11,8 +11,9 @@ mf.comp.Ttlhdr = class extends Header {
     
     constructor (po) {
         try {
-            super(po);
+            super();
             this.name('Ttlhdr');
+            this.prmOpt(po);
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -125,6 +126,9 @@ mf.comp.Ttlhdr = class extends Header {
     
     setTitleColor (ttl) {
         try {
+            if (null === this.color()) {
+                return;
+            }
             let rgb = this.color().rgba();
             let clr = null;
             
@@ -139,7 +143,7 @@ mf.comp.Ttlhdr = class extends Header {
             } else {
                 let chd_ttl = this.title();
                 if (true === mf.func.isObject(chd_ttl, 'Text')) {
-                    ttl.color(new mf.Color(255,255,255));
+                    chd_ttl.color(new mf.Color(255,255,255));
                 } else if ( (null !== chd_ttl) && (undefined !== chd_ttl[0]) ) {
                     for (let cidx in chd_ttl) {
                         if (true === mf.func.isObject(chd_ttl[cidx], 'Text')) {
