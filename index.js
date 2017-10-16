@@ -25,19 +25,13 @@ mf.comp.Ttlhdr = class extends Header {
             super.initDomConts();
             
             /* set header style */
-            let hdr_css = {
+            this.style({
                 'display'     : 'flex',
                 'align-items' : 'center'
-            };
-            this.style(hdr_css);
+            });
             
             /* set header title area */
-            hdr_css['margin-left'] = '20px';
-            this.addChild(
-                new mf.Component({
-                    style : hdr_css
-                })
-            );
+            this.addChild(this.titleBase());
             if (null !== prm) {
                 this.title(prm);
             }
@@ -49,21 +43,56 @@ mf.comp.Ttlhdr = class extends Header {
     
     title (val) {
         try {
-            let ttl = this.child()[0].child();
+            let ttlbase = this.titleBase().child();
             if (undefined === val) {
                 /* getter */
-                if (0 === ttl.length) {
-                    return null;
-                }
-                return (1 === ttl.length) ? ttl[0] : ttl;
+                return ttlbase;
             }
             /* setter */
-            if (0 === ttl.length) {
+            if ( ('object'  === typeof val) &&
+                 (undefined !== val[0]) ) {
+                for (let vidx in val) {
+                    if ( (0 === vidx) &&
+                         (0 === ttlbase.length) ) {
+                        this.setTitleEvent(val[vidx]);
+                        this.setTitleColor(val[vidx]);
+                        ttlbase[0].updChild(ttl[0], val[vidx]);
+                    } else {
+                        this.addTitle(val[vidx]);
+                    }
+                }
+            } else if (0 === ttlbase.length) {
                 this.addTitle(val);
             } else {
                 this.setTitleEvent(val);
-                this.child()[0].updChild(ttl[0], val);
+                this.setTitleColor(val);
+                ttlbase[0].updChild(ttl[0], val);
             }
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    titleBase (val) {
+        try {
+            if (undefined === val) {
+                /* getter */
+                if (undefined === this.m_title) {
+                    this.titleBase(new mf.Component());
+                }
+                return this.m_title;
+            }
+            /* setter */
+            if (true !== mf.func.isInclude(val, 'Component')) {
+                throw new Error('invalid parameter');
+            }
+            val.style({
+                'display'     : 'flex',
+                'align-items' : 'center',
+                'margin-left' : '20px'
+            });
+            this.m_title = val;
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -72,7 +101,7 @@ mf.comp.Ttlhdr = class extends Header {
     
     addTitle (val) {
         try {
-            let ttl = this.child()[0];
+            let ttl = this.titleBase();
             let set_val = null;
             if (true === mf.func.isInclude(val, 'Text')) {
                 set_val = val;
