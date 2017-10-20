@@ -68,6 +68,7 @@ mf.comp.Ttlhdr = class extends Header {
                 this.setTitleColor(val);
                 ttlbase[0].updChild(ttl[0], val);
             }
+            
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -159,29 +160,11 @@ mf.comp.Ttlhdr = class extends Header {
                 return;
             }
             let rgb = this.color().rgba();
-            let clr = null;
+            let clr = (290 > (rgb[0]+rgb[1]+rgb[2])) ?
+                      new mf.Color(255,255,255) : new mf.Color(0,0,0);
             
-            if (290 > (rgb[0]+rgb[1]+rgb[2])) {
-                clr = new mf.Color(255,255,255);
-            } else {
-                clr = new mf.Color(0,0,0);
-            }
-            
-            if (true === mf.func.isObject(ttl, 'Text')) {
-                ttl.color(new mf.Color(255,255,255));
-            } else {
-                let chd_ttl = this.title();
-                if (true === mf.func.isObject(chd_ttl, 'Text')) {
-                    chd_ttl.color(new mf.Color(255,255,255));
-                } else if ( (null !== chd_ttl) && (undefined !== chd_ttl[0]) ) {
-                    for (let cidx in chd_ttl) {
-                        if (true === mf.func.isObject(chd_ttl[cidx], 'Text')) {
-                            chd_ttl[cidx].color(
-                                new mf.Color(255,255,255)
-                            );
-                        }
-                    }
-                }
+            if (true === mf.func.isInclude(ttl, 'Text')) {
+                ttl.color(clr);
             }
         } catch (e) {
             console.error(e.stack);
@@ -195,8 +178,11 @@ mf.comp.Ttlhdr = class extends Header {
             if (undefined !== ret) {
                 return ret;
             }
-            if (0 !== this.child().length) {
-                this.setTitleColor();
+            let ttl = this.title();
+            if (0 !== ttl.length) {
+                for (let tidx in ttl) {
+                    this.setTitleColor(ttl[tidx]);
+                }
             }
         } catch (e) {
             console.error(e.stack);
