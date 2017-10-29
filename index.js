@@ -4,7 +4,7 @@
  */
 let mf     = require('mofron');
 let Header = require('mofron-comp-header');
-require('mofron-comp-text');
+let Text   = require('mofron-comp-text');
 let Click  = require('mofron-event-click');
 
 mf.comp.Ttlhdr = class extends Header {
@@ -111,7 +111,7 @@ mf.comp.Ttlhdr = class extends Header {
                     (null === set_val.size()) ? 35 : undefined
                 );
             } else if ('string' === typeof val) {
-                set_val = this.theme().component('mofron-comp-text');
+                set_val = new Text();
                 ttl.addChild(set_val);
                 set_val.text(val);
                 set_val.size(
