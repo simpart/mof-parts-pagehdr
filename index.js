@@ -35,6 +35,7 @@ mf.comp.Ttlhdr = class extends Header {
             if (null !== prm) {
                 this.title(prm);
             }
+            
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -176,6 +177,10 @@ mf.comp.Ttlhdr = class extends Header {
         try {
             var ret = super.color(clr);
             if (undefined !== ret) {
+                if (null === ret) {
+                    this.color(new mf.Color(255,255,255));
+                    return this.color();
+                }
                 return ret;
             }
             let ttl = this.title();
