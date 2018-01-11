@@ -69,7 +69,7 @@ mf.comp.Ttlhdr = class extends Header {
                 this.setTitleColor(val);
                 ttlbase[0].updChild(ttl[0], val);
             }
-            
+            this.height(this.height());
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -206,6 +206,31 @@ mf.comp.Ttlhdr = class extends Header {
                 throw new Error('invalid prameter');
             }
             this.m_url = ul;
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    height (val) {
+        try {
+            let ret = super.height(val);
+            if (undefined !== ret) {
+                /* getter */
+                return ret;
+            }
+            /* setter */
+            if ('number' !== typeof val) {
+                throw new Error('invalid parameter');
+            }
+            let ttl = this.title();
+            for (let idx in ttl) {
+                if (true === mf.func.isInclude(ttl[idx], 'Text')) {
+                    if (20 < val) {
+                        ttl[idx].size(val-10);
+                    }
+                }
+            }
         } catch (e) {
             console.error(e.stack);
             throw e;
