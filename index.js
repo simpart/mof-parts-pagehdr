@@ -2,13 +2,13 @@
  * @file   mofron-comp-header-title/index.js
  * @author simpart
  */
-let mf     = require('mofron');
-let Header = require('mofron-comp-header');
-let Text   = require('mofron-comp-text');
-let Click  = require('mofron-event-click');
+let mf      = require('mofron');
+let Header  = require('mofron-comp-header');
+let Text    = require('mofron-comp-text');
+let Click   = require('mofron-event-click');
 let Horizon = require('mofron-layout-horizon');
 
-module.exports = class extends Header {
+mf.comp.Ttlhdr = class extends Header {
     
     constructor (po) {
         try {
@@ -180,4 +180,5 @@ module.exports = class extends Header {
         }
     }
 }
+module.exports = mf.comp.Ttlhdr;
 /* end of file */
