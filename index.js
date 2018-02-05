@@ -6,8 +6,9 @@ let mf     = require('mofron');
 let Header = require('mofron-comp-header');
 let Text   = require('mofron-comp-text');
 let Click  = require('mofron-event-click');
+let Horizon = require('mofron-layout-horizon');
 
-mf.comp.Ttlhdr = class extends Header {
+module.exports = class extends Header {
     
     constructor (po) {
         try {
@@ -23,15 +24,19 @@ mf.comp.Ttlhdr = class extends Header {
     initDomConts(prm) {
         try {
             super.initDomConts();
-            
-            /* set header style */
-            this.style({
-                'display'     : 'flex',
-                'align-items' : 'center'
+            this.target().style({
+                'align-items'  : 'center',
             });
+            let ttl_base = new mf.Component({
+                addLayout : new Horizon(),
+                style : { 
+                    'align-items' : 'center',
+                    'margin-left' : '20px'
+                }
+            });
+            this.addChild(ttl_base);
             
             /* set header title area */
-            this.addChild(this.titleBase());
             if (null !== prm) {
                 this.title(prm);
             }
@@ -42,91 +47,32 @@ mf.comp.Ttlhdr = class extends Header {
         }
     }
     
-    title (val) {
+    title (val, idx) {
         try {
-            let ttlbase = this.titleBase().child();
+            let ttl = this.child()[0];
             if (undefined === val) {
                 /* getter */
-                return ttlbase;
+                return (0 === ttl.child().length) ? null : ttl.child();
             }
             /* setter */
-            if ( ('object'  === typeof val) &&
-                 (undefined !== val[0]) ) {
-                for (let vidx in val) {
-                    if ( (0 === vidx) &&
-                         (0 === ttlbase.length) ) {
-                        this.setTitleEvent(val[vidx]);
-                        this.setTitleColor(val[vidx]);
-                        ttlbase[0].updChild(ttl[0], val[vidx]);
-                    } else {
-                        this.addTitle(val[vidx]);
-                    }
-                }
-            } else if (0 === ttlbase.length) {
-                this.addTitle(val);
-            } else {
-                this.setTitleEvent(val);
-                this.setTitleColor(val);
-                ttlbase[0].updChild(ttl[0], val);
-            }
-            this.height(this.height());
-        } catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-    
-    titleBase (val) {
-        try {
-            if (undefined === val) {
-                /* getter */
-                if (undefined === this.m_title) {
-                    this.titleBase(new mf.Component());
-                }
-                return this.m_title;
-            }
-            /* setter */
-            if (true !== mf.func.isInclude(val, 'Component')) {
+            if ('string' === typeof val) {
+                val = new Text(val);
+            } else if (true !== mf.func.isInclude(val, 'Component')) {
                 throw new Error('invalid parameter');
             }
-            val.style({
-                'display'     : 'flex',
-                'align-items' : 'center',
-                'margin-left' : '20px'
-            });
-            this.m_title = val;
-        } catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-    
-    addTitle (val) {
-        try {
-            let ttl = this.titleBase();
-            let set_val = null;
+            
             if (true === mf.func.isInclude(val, 'Text')) {
-                set_val = val;
-                ttl.addChild(set_val);
-                set_val.size(
-                    (null === set_val.size()) ? 35 : undefined
-                );
-            } else if ('string' === typeof val) {
-                set_val = new Text();
-                ttl.addChild(set_val);
-                set_val.text(val);
-                set_val.size(
-                    (null === set_val.size()) ? 35 : undefined
-                );
+                val.size(this.height()-10);
             } else if (true === mf.func.isInclude(val, 'Component')) {
-                set_val = val;
-                ttl.addChild(set_val);
+                val.height(this.height());
             } else {
                 throw new Error('invalid parameter');
             }
-            /* set title config */
-            this.setTitleEvent(set_val);
-            this.setTitleColor(set_val);
+
+            this.setTitleEvent(val);
+            this.setTitleColor(val);
+            
+            ttl.addChild(val, idx);
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -137,14 +83,11 @@ mf.comp.Ttlhdr = class extends Header {
         try {
             let clk_fnc = (tgt, ttl) => {
                 try {
-                    if (null !== ttl.url()) {
-                        location.href = ttl.url();
-                    }
+                    location.href = (null === ttl.url())? './' : ttl.url();
                 } catch (e) {
                     console.log(e.stack);
                 }
             };
-            
             /* set click event */
             val.addEvent(
                 new Click(clk_fnc, this)
@@ -184,7 +127,7 @@ mf.comp.Ttlhdr = class extends Header {
                 return ret;
             }
             let ttl = this.title();
-            if (0 !== ttl.length) {
+            if (null !== ttl) {
                 for (let tidx in ttl) {
                     this.setTitleColor(ttl[tidx]);
                 }
@@ -223,10 +166,10 @@ mf.comp.Ttlhdr = class extends Header {
             if ('number' !== typeof val) {
                 throw new Error('invalid parameter');
             }
-            let ttl = this.title();
+            let ttl = this.child();
             for (let idx in ttl) {
                 if (true === mf.func.isInclude(ttl[idx], 'Text')) {
-                    if (20 < val) {
+                    if (val < (ttl[idx].size()-10)) {
                         ttl[idx].size(val-10);
                     }
                 }
@@ -237,5 +180,4 @@ mf.comp.Ttlhdr = class extends Header {
         }
     }
 }
-mf.comp.ttlhdr = {};
-module.exports = mf.comp.Ttlhdr;
+/* end of file */
