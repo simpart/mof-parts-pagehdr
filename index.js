@@ -1,5 +1,6 @@
 /**
- * @file   mofron-comp-header-title/index.js
+ * @file   mofron-comp-ttlhdr/index.js
+ * @brief  title header component for mofron
  * @author simpart
  */
 let mf      = require('mofron');
@@ -10,20 +11,16 @@ let Horizon = require('mofron-layout-horizon');
 
 mf.comp.Ttlhdr = class extends Header {
     
-    constructor (po) {
-        try {
-            super();
-            this.name('Ttlhdr');
-            this.prmOpt(po);
-        } catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-    
+    /**
+     * initialize dom contents
+     *
+     * @param prm : (string, mofron-comp-text) title
+     */
     initDomConts(prm) {
         try {
+            this.name('Ttlhdr');
             super.initDomConts();
+            
             this.target().style({
                 'align-items'  : 'center',
             });
@@ -40,7 +37,6 @@ mf.comp.Ttlhdr = class extends Header {
             if (null !== prm) {
                 this.title(prm);
             }
-            
         } catch (e) {
             console.error(e.stack);
             throw e;
