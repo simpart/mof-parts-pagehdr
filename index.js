@@ -10,7 +10,16 @@ let Click   = require('mofron-event-click');
 let Horizon = require('mofron-layout-horizon');
 
 mf.comp.Ttlhdr = class extends Header {
-    
+    constructor (po) {
+        try {
+            super();
+            this.name('Ttlhdr');
+            this.prmOpt(po);
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
     /**
      * initialize dom contents
      *
@@ -18,7 +27,6 @@ mf.comp.Ttlhdr = class extends Header {
      */
     initDomConts(prm) {
         try {
-            this.name('Ttlhdr');
             super.initDomConts();
             
             this.target().style({
