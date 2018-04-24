@@ -42,9 +42,7 @@ mf.comp.Ttlhdr = class extends Header {
             this.addChild(ttl_base);
             
             /* set header title area */
-            if (null !== prm) {
-                this.title(prm);
-            }
+            this.title(prm);
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -72,8 +70,10 @@ mf.comp.Ttlhdr = class extends Header {
             } else {
                 throw new Error('invalid parameter');
             }
-
-            this.setTitleEvent(val);
+            
+            if (null !== this.url()) {
+                this.setTitleEvent(val);
+            }
             this.setTitleColor(val);
             
             ttl.addChild(val, idx);
@@ -87,7 +87,7 @@ mf.comp.Ttlhdr = class extends Header {
         try {
             let clk_fnc = (tgt, ttl) => {
                 try {
-                    location.href = (null === ttl.url())? './' : ttl.url();
+                    location.href = ttl.url();
                 } catch (e) {
                     console.log(e.stack);
                 }
@@ -153,6 +153,13 @@ mf.comp.Ttlhdr = class extends Header {
                 throw new Error('invalid prameter');
             }
             this.m_url = ul;
+            
+            let ttl = this.title();
+            if (null !== ttl) {
+                for (let tidx in ttl) {
+                    this.setTitleEvent(ttl[tidx]);
+                }
+            }
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -170,11 +177,14 @@ mf.comp.Ttlhdr = class extends Header {
             if ('number' !== typeof val) {
                 throw new Error('invalid parameter');
             }
-            let ttl = this.child();
-            for (let idx in ttl) {
-                if (true === mf.func.isInclude(ttl[idx], 'Text')) {
-                    if (val < (ttl[idx].size()-10)) {
-                        ttl[idx].size(val-10);
+            /* resize title text */
+            if (0 !== this.child().length) {
+                let ttl = this.title();
+                for (let tidx in ttl) {
+                    if (true === mf.func.isInclude(ttl[tidx], 'Text')) {
+                        if (val > 20) {
+                            ttl[tidx].size(val-10);
+                        }
                     }
                 }
             }
