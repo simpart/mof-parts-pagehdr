@@ -111,7 +111,7 @@ mf.comp.Ttlhdr = class extends Header {
             let clr = (290 > (rgb[0]+rgb[1]+rgb[2])) ?
                       new mf.Color(255,255,255) : new mf.Color(0,0,0);
             
-            if (true === mf.func.isInclude(ttl, 'Text')) {
+            if ((true === mf.func.isInclude(ttl, 'Text')) && (null === ttl.color())) {
                 ttl.color(clr);
             }
         } catch (e) {
